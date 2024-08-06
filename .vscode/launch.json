@@ -41,8 +41,8 @@
         // "--parameters=LateDecember2023",
         // "--parameters=/Users/tedshaffer/Documents/Projects/tedTaggerServer/public/takeouts/LateDecember2023"
 
-        "--job=DownloadGooglePhotos",
-        "--parameters=/Users/tedshaffer/Documents/Projects/tedTaggerServer/public/images",
+        // "--job=DownloadGooglePhotos",
+        // "--parameters=/Users/tedshaffer/Documents/Projects/tedTaggerServer/public/images",
 
       ]
     }
