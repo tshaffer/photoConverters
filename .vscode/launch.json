@@ -45,7 +45,8 @@
         // "--parameters=/Users/tedshaffer/Documents/Projects/tedTaggerServer/public/images",
 
         "--job=ConvertHeicToJpg",
-        "--parameters=/Users/tedshaffer/Documents/Projects/tedTaggerServer/public/images",
+        "--parameters=/Users/tedshaffer/Documents/IMG_9070.HEIC",
+        "--parameters=/Users/tedshaffer/Documents/IMG_9070.jpg",
       ]
     }
   ]
