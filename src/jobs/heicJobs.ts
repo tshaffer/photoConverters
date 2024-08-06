@@ -3,9 +3,9 @@ const fs = require('fs');
 import convert from 'heic-convert';
 
 export const convertHeicToJpgJob = async (input: string, output: string) => {
-  console.log('convertHeicToJpgJob', input, output);
-  return;
-  convertHEICFileToJPEG(input, output);
+  console.log('convertHeicToJpgJob invoked', input, output);
+  await convertHEICFileToJPEG(input, output);
+  console.log('convertHeicToJpgJob completed');
 }
 
 async function convertHEICFileToJPEG(input: string, output: string): Promise<void> {
