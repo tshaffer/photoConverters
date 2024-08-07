@@ -1,10 +1,6 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-
     {
       "type": "node",
       "request": "launch",
@@ -17,36 +13,15 @@
       "outFiles": [
         "${workspaceFolder}/dist/**/*.js"
       ],
+      "env": {
+        "NODE_ENV": "production",
+        "USER": "tedshaffer" // Ensure USER environment variable is set correctly
+      },
+      "runtimeArgs": ["--preserve-symlinks"],
       "args": [
-        // "--job=GetGoogleAlbum",
-        // "--parameters=AEEKk92H41_rvghQJIFmYvp35lHhQfqZFb9-CpABuE6Y8IahAKtEuCUXKs_2QRF_Ixs1Puzamc5y",
-        // // "--parameters=AEEKk93e3K61r9mYHDoVxCAAuQZlDD_bxOGlYnMDSn45ZpFz9BYZNnOrxfkZu-guCML9AfAq2Avt",
-        // "--job=ListGoogleAlbums",
-        // "--job=BuildGoogleMediaItemsById",
-        // "--parameters=/Volumes/SHAFFEROTO/Data 8-17-2023/googleMediaItemsById-2.json"
-        // "--job=GetAllMediaItems",
-        
-        // "--job=AddMediaItemsFromSingleTakeout",
-        // "--parameters=Year 2014",
-        // "--parameters=/Users/tedshaffer/Documents/pgData/Takeouts/Takeout/Year 2014",
-
-
-        // "--job=AddMediaItemsFromSingleTakeout",
-        // "--parameters=Year 2021",
-        // "--parameters=/Users/tedshaffer/Documents/pgData/Takeouts/Takeout/Year 2021",
-
-        // "--job=InitializeKeywordCollections",
-
-        // "--job=AddMediaItemsFromSingleTakeout",
-        // "--parameters=LateDecember2023",
-        // "--parameters=/Users/tedshaffer/Documents/Projects/tedTaggerServer/public/takeouts/LateDecember2023"
-
-        // "--job=DownloadGooglePhotos",
-        // "--parameters=/Users/tedshaffer/Documents/Projects/tedTaggerServer/public/images",
-
         "--job=ConvertHeicToJpg",
-        "--parameters=/Users/tedshaffer/Documents/IMG_9070.HEIC",
-        "--parameters=/Users/tedshaffer/Documents/IMG_9070.jpg",
+        "--parameters=/Users/tedshaffer/Documents/Projects/tedTaggerServer/public/SHAFFEROTO/googlePhotosOverflow/Waterfalls 2024/IMG_9140.HEIC",
+        "--parameters=/Users/tedshaffer/Documents/IMG_9140.jpg",
       ]
     }
   ]
