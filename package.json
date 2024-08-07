@@ -18,6 +18,7 @@
     "fs-extra": "^9.0.1",
     "gm": "^1.25.0",
     "heic-convert": "^2.1.0",
+    "heic-jpg-exif": "^0.3.5",
     "lodash": "^4.17.20",
     "node-dir": "^0.1.17",
     "open": "^7.3.0"
