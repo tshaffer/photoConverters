@@ -37,70 +37,62 @@ export const convertHeicToJpgWithExif = async (heicPath: string, jpgPath: string
   console.log('exifData: ', exifData);
 
   // Step 2: Convert the HEIC file to JPG
-  // const inputBuffer = await promisify(fs.readFile)(heicPath);
-  // console.log('readFile successful');
+  const inputBuffer = await promisify(fs.readFile)(heicPath);
+  console.log('readFile successful');
 
-  // try {
+  const outputBuffer = await convert({
+    buffer: inputBuffer, // the HEIC file buffer
+    format: 'JPEG',      // output format
+    quality: 1           // the jpeg compression quality, between 0 and 1
+  });
 
-  //   const outputBuffer = await convert({
-  //     buffer: inputBuffer, // the HEIC file buffer
-  //     format: 'JPEG',      // output format
-  //     quality: 1           // the jpeg compression quality, between 0 and 1
-  //   });
-
-  //   // Step 3: Save the converted JPG
-  //   await promisify(fs.writeFile)(jpgPath, outputBuffer);
-  //   console.log(`Converted ${heicPath} to ${jpgPath}`);
-  // } catch (error) {
-  //   console.error('Error during conversion:', error);
-  // } finally {
-  //   // Ensure the exiftool process is properly terminated
-  //   // await exiftool.end();
-  //   console.log('first Finally block');
-  // }
-  // try {
-
-
-
-
-  //   // const outputBuffer = await convert({
-  //   //   buffer: inputBuffer, // the HEIC file buffer
-  //   //   format: 'JPEG',      // output format
-  //   //   quality: 1           // the jpeg compression quality
-  //   // });
-
-  //   // // Step 3: Save the converted JPG
-  //   // await promisify(fs.writeFile)(jpgPath, outputBuffer);
-  //   // console.log(`Converted ${heicPath} to ${jpgPath}`);
-
-  //   // Step 4: Write the saved EXIF data to the JPG
-  //   // await exiftool.write(jpgPath, exifData);
-
-  console.log('try write');
-  // const p = exiftool.write(jpgPath, { XPComment: "this is a test comment" })
   try {
 
-    const p = exiftool.write(jpgPath, { Orientation: '6' })
-    // const p = exiftool.write(jpgPath, { ProfileCreator: 'Apple Computer, Inc.' });
-    console.log('return from write');
-    await p;
-    console.log('return from await');
-  }
-  catch (error) {
-    console.error('Error during EXIF transfer:', error);
+    // Step 3: Save the converted JPG
+    await promisify(fs.writeFile)(jpgPath, outputBuffer);
+    console.log(`Converted ${heicPath} to ${jpgPath}`);
+  } catch (error) {
+    console.error('Error during conversion:', error);
   } finally {
-    console.log('second Finally block');
     // Ensure the exiftool process is properly terminated
-    await exiftool.end();
+    // await exiftool.end();
+    console.log('first Finally block');
   }
+  try {
+    // Step 3: Save the converted JPG
+    await promisify(fs.writeFile)(jpgPath, outputBuffer);
+    console.log(`Converted ${heicPath} to ${jpgPath}`);
+
+    // Step 4: Write the saved EXIF data to the JPG
+    // await exiftool.write(jpgPath, exifData);
+
+    console.log('try write');
+    // const p = exiftool.write(jpgPath, { XPComment: "this is a test comment" })
+    try {
+
+      // const p = exiftool.write(jpgPath, { Orientation: '6' })
+      const p = exiftool.write(jpgPath, { AllDates: "2024-08-07T14:00:00" })
+      // const p = exiftool.write(jpgPath, { ProfileCreator: 'Apple Computer, Inc.' });
+      console.log('return from write');
+      await p;
+      console.log('return from await');
+      
+    }
+    catch (error) {
+      console.error('Error during EXIF transfer:', error);
+    } finally {
+      console.log('second Finally block');
+      // Ensure the exiftool process is properly terminated
+      await exiftool.end();
+    }
 
 
-  //   console.log(`Copied EXIF data from ${heicPath} to ${jpgPath}`);
-  // } catch (error) {
-  //   console.error('Error during EXIF transfer:', error);
-  // } finally {
-  //   console.log('second Finally block');
-  //   // Ensure the exiftool process is properly terminated
-  //   await exiftool.end();
-  // }
-}
+    //   console.log(`Copied EXIF data from ${heicPath} to ${jpgPath}`);
+    // } catch (error) {
+    //   console.error('Error during EXIF transfer:', error);
+    // } finally {
+    //   console.log('second Finally block');
+    //   // Ensure the exiftool process is properly terminated
+    //   await exiftool.end();
+    // }
+  }
