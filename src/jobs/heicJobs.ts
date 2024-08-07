@@ -1,21 +1,13 @@
-const { promisify } = require('util');
-const fs = require('fs');
-import convert from 'heic-convert';
+import { convertHEICFileToJPEG, convertHEICFolderToJPEG } from '../controllers';
 
-export const convertHeicToJpgJob = async (input: string, output: string) => {
-  console.log('convertHeicToJpgJob invoked', input, output);
+export const convertHeicFileToJpgJob = async (input: string, output: string) => {
+  console.log('convertHeicFileToJpgJob invoked', input, output);
   await convertHEICFileToJPEG(input, output);
-  console.log('convertHeicToJpgJob completed');
+  console.log('convertHeicFileToJpgJob completed');
 }
 
-async function convertHEICFileToJPEG(input: string, output: string): Promise<void> {
-
-  const inputBuffer = await promisify(fs.readFile)(input);
-  const outputBuffer = await convert({
-    buffer: inputBuffer, // the HEIC file buffer
-    format: 'JPEG',      // output format
-    quality: 1           // the jpeg compression quality, between 0 and 1
-  });
-
-  await promisify(fs.writeFile)(output, outputBuffer);
+export const convertHeicFolderToJpgJob = async (input: string, output: string) => {
+  console.log('convertHeicFolderToJpgJob invoked', input, output);
+  await convertHEICFolderToJPEG(input, output);
+  console.log('convertHeicFolderToJpgJob completed');
 }

@@ -2,7 +2,8 @@ import commandLineArgs from 'command-line-args';
 import { isArray, isNil } from 'lodash';
 
 import { Jobs } from './types';
-import { convertHeicToJpgJob } from './jobs';
+import { convertHeicFileToJpgJob, convertHeicFolderToJpgJob } from './jobs';
+import { convertNefFolderToJpgJob, convertNefFileToJpgJob } from './jobs/nefJobs';
 
 const optionDefinitions = [
   { name: 'job', alias: 'j', type: String },
@@ -19,13 +20,38 @@ async function main() {
   const { job, parameters } = getCommandLineArguments(options);
 
   switch (options.job) {
-    case Jobs.ConvertHeicToJpg:
+    case Jobs.ConvertHeicFolderToJpg: {
+      console.log('ConvertHeicFolderToJpg');
+      if (parameters.length !== 2) {
+        debugger;
+      }
+      await convertHeicFolderToJpgJob(parameters[0], parameters[1]);
+      break;
+    }
+    case Jobs.ConvertHeicFileToJpg: {
       console.log('ConvertHeicToJpg');
       if (parameters.length !== 2) {
         debugger;
       }
-      await convertHeicToJpgJob(parameters[0], parameters[1]);
+      await convertHeicFileToJpgJob(parameters[0], parameters[1]);
       break;
+    }
+    case Jobs.ConvertNefFolderToJpg: {
+      console.log('ConvertNefFolderToJpg');
+      if (parameters.length !== 2) {
+        debugger;
+      }
+      await convertNefFolderToJpgJob(parameters[0], parameters[1]);
+      break;
+    }
+    case Jobs.ConvertNefFileToJpg: {
+      console.log('ConvertNefToJpg');
+      if (parameters.length !== 2) {
+        debugger;
+      }
+      await convertNefFileToJpgJob(parameters[0], parameters[1]);
+      break;
+    }
   }
 
 }

@@ -1,5 +1,7 @@
 export enum Jobs {
-  ConvertHeicToJpg = 'ConvertHeicToJpg',
-  ConvertNefToJpg = 'ConvertNefToJpg',
+  ConvertHeicFolderToJpg = 'ConvertHeicFolderToJpg',
+  ConvertHeicFileToJpg = 'ConvertHeicFileToJpg',
+  ConvertNefFolderToJpg = 'ConvertNefFolderToJpg',
+  ConvertNefFileToJpg = 'ConvertNefFileToJpg',
 }
 
