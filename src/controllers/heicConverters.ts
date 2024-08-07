@@ -1,7 +1,7 @@
 const { promisify } = require('util');
 const fs = require('fs');
 import convert from 'heic-convert';
-import { getConvertibleImageFilePaths } from '../utilities';
+import { checkAndCreateDirectory, getConvertibleImageFilePaths } from '../utilities';
 
 export async function convertHEICFileToJPEG(inputFilePath: string, outputFilePath: string): Promise<void> {
 
@@ -17,6 +17,7 @@ export async function convertHEICFileToJPEG(inputFilePath: string, outputFilePat
 
 export async function convertHEICFolderToJPEG(inputFolder: string, outputFolder: string): Promise<void> {
   console.log('Folder conversion invoked: ', inputFolder, outputFolder);
+  await checkAndCreateDirectory(outputFolder);
   const imageFileExtensions = ['.heic', '.HEIC', '.nef', '.NEF'];
   const filesToConvert = getConvertibleImageFilePaths(imageFileExtensions, inputFolder);
   for (const inputFilePath of filesToConvert) {

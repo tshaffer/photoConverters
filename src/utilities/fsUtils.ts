@@ -29,3 +29,18 @@ export const getConvertibleImageFilePaths = (convertibleImageFileExtensions: str
   return imageFiles;
 }
 
+export const checkAndCreateDirectory = async (path: string) => {
+  try {
+    await fs.access(path);
+    console.log('Directory already exists.');
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      // Directory does not exist, create it
+      await fs.mkdir(path, { recursive: true });
+      console.log('Directory created successfully!');
+    } else {
+      throw err;
+    }
+  }
+}
+
