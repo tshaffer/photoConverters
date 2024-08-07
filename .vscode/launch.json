@@ -19,9 +19,13 @@
       },
       "runtimeArgs": ["--preserve-symlinks"],
       "args": [
-        "--job=ConvertHeicToJpg",
-        "--parameters=/Users/tedshaffer/Documents/Projects/tedTaggerServer/public/SHAFFEROTO/googlePhotosOverflow/Waterfalls 2024/IMG_9140.HEIC",
-        "--parameters=/Users/tedshaffer/Documents/IMG_9140.jpg",
+        // "--job=ConvertHeicToJpg",
+        // "--parameters=/Users/tedshaffer/Documents/Projects/tedTaggerServer/public/SHAFFEROTO/googlePhotosOverflow/Waterfalls 2024/IMG_9140.HEIC",
+        // "--parameters=/Users/tedshaffer/Documents/IMG_9140.jpg",
+        "--job=ConvertHeicFileToJpg",
+        "--parameters=/Users/tedshaffer/Documents/IMG_9070.HEIC",
+        // "--parameters=/Users/tedshaffer/Documents/IMG_9070.HEIC",
+        "--parameters=/Users/tedshaffer/Documents/IMG_9070.jpg",
       ]
     }
   ]

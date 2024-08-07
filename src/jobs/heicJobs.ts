@@ -1,8 +1,8 @@
-import { convertHEICFileToJPEG, convertHEICFolderToJPEG } from '../controllers';
+import { convertHEICFileToJPEG, convertHEICFolderToJPEG, convertHeicToJpgWithExif } from '../controllers';
 
 export const convertHeicFileToJpgJob = async (input: string, output: string) => {
   console.log('convertHeicFileToJpgJob invoked', input, output);
-  await convertHEICFileToJPEG(input, output);
+  await convertHeicToJpgWithExif(input, output);
   console.log('convertHeicFileToJpgJob completed');
 }
 
