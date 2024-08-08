@@ -3,22 +3,19 @@ const fs = require('fs');
 import convert from 'heic-convert';
 import { checkAndCreateDirectory, getConvertibleImageFilePaths } from '../utilities';
 import { convertCreateDateToISO } from '../utilities/uilities';
-import { EXIFTags } from 'exiftool-vendored/dist/Tags';
 const { exiftool } = require('exiftool-vendored');
 
 export async function convertHEICFileToJPEG(inputFilePath: string, outputFilePath: string): Promise<void> {
-
   const inputBuffer = await promisify(fs.readFile)(inputFilePath);
   const outputBuffer = await convert({
     buffer: inputBuffer, // the HEIC file buffer
     format: 'JPEG',      // output format
     quality: 1           // the jpeg compression quality, between 0 and 1
   });
-
   await promisify(fs.writeFile)(outputFilePath, outputBuffer);
 }
 
-export async function convertHEICFolderToJPEG(inputFolder: string, outputFolder: string): Promise<void> {
+export async function convertHEICFolderToJPEGWithEXIF(inputFolder: string, outputFolder: string): Promise<void> {
   console.log('Folder conversion invoked: ', inputFolder, outputFolder);
   await checkAndCreateDirectory(outputFolder);
   const imageFileExtensions = ['.heic', '.HEIC', '.nef', '.NEF'];
@@ -26,12 +23,14 @@ export async function convertHEICFolderToJPEG(inputFolder: string, outputFolder:
   for (const inputFilePath of filesToConvert) {
     const outputFilePath: string = inputFilePath.replace(inputFolder, outputFolder).replace('.heic', '.jpg').replace('.HEIC', '.jpg').replace('.nef', '.jpg').replace('.NEF', '.jpg');
     console.log('Converting: ', inputFilePath, ' to ', outputFilePath);
-    await convertHeicToJpgWithExif(inputFilePath, outputFilePath);
+    await convertHEICFileToJPEGWithEXIF(inputFilePath, outputFilePath);
   }
+  // Ensure the exiftool process is properly terminated
+  await exiftool.end();
   console.log('Folder conversion complete');
 }
 
-export const convertHeicToJpgWithExif = async (heicPath: string, jpgPath: string): Promise<void> => {
+export const convertHEICFileToJPEGWithEXIF = async (heicPath: string, jpgPath: string): Promise<void> => {
   try {
     // Step 1: Retrieve EXIF data from the HEIC file
     console.log('heicPath: ', heicPath);
@@ -56,9 +55,7 @@ export const convertHeicToJpgWithExif = async (heicPath: string, jpgPath: string
   catch (error) {
     console.error('Error in convertHeicToJpgWithExif:', error);
   } finally {
-    console.log('second Finally block');
-    // Ensure the exiftool process is properly terminated
-    await exiftool.end();
+    console.log('convertHeicToJpgWithExif complete');
   }
 }
 
