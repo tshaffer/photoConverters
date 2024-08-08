@@ -64,6 +64,9 @@ export const writeTags = async (filePath: string, exifData: any): Promise<void> 
     const isoDate: string = await convertCreateDateToISO(exifData);
     console.log('isoDate: ', isoDate);
     await exiftool.write(filePath, { AllDates: isoDate })
+    await exiftool.write(filePath, { SubSecTimeDigitized: isoDate })
+    await exiftool.write(filePath, { SubSecTimeOriginal: isoDate })
+    await exiftool.write(filePath, { SubSecModifyDate: isoDate })
   } catch (error) {
     console.error('Error during EXIF transfer:', error);
   }

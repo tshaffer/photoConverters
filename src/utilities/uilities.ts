@@ -1,5 +1,5 @@
 import { Tags, ExifDateTime } from "exiftool-vendored";
-import { DateTime, DateTimeJSOptions } from 'luxon';
+import { DateObject, DateTime } from 'luxon';
 
 export async function convertCreateDateToISO(tags: Tags): Promise<string | null> {
   try {
@@ -11,26 +11,30 @@ export async function convertCreateDateToISO(tags: Tags): Promise<string | null>
     let isoDateString: string;
 
     if (createDate instanceof ExifDateTime) {
-      
-      const options: DateTimeJSOptions = { zone: 'utc' };
+
+      const { year, month, day, hour, minute, second, millisecond, tzoffsetMinutes } = createDate;
+
+      // Calculate the time zone offset in hours
+      const timeZoneOffset = tzoffsetMinutes / 60;
 
       // If CreateDate is an ExifDateTime object, use its properties directly and set to UTC
-      const dateTime = DateTime.fromObject({
-        year: createDate.year,
-        month: createDate.month,
-        day: createDate.day,
-        hour: createDate.hour,
-        minute: createDate.minute,
-        second: createDate.second,
-        millisecond: createDate.millisecond,
-        zone: 'utc',
-        // ...options,
+      const dateTime: DateTime = DateTime.fromObject({
+        year,
+        month,
+        day,
+        hour,
+        minute,
+        second,
+        millisecond,
+        zone: `UTC${timeZoneOffset > 0 ? '+' : ''}${timeZoneOffset}`
       });
+
       isoDateString = dateTime.toISO();
+
     } else {
       // If CreateDate is a string, parse and format it using Luxon and set to UTC
       // Assuming the string format is "yyyy:MM:dd HH:mm:ss"
-      const parsedDate = DateTime.fromFormat(createDate, 'yyyy:MM:dd HH:mm:ss', { zone: 'utc' });
+      const parsedDate: DateTime = DateTime.fromFormat(createDate, 'yyyy:MM:dd HH:mm:ss', { zone: 'utc' });
       isoDateString = parsedDate.toISO();
     }
 

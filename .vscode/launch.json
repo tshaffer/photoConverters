@@ -23,13 +23,13 @@
         // "--parameters=/Users/tedshaffer/Documents/Projects/tedTaggerServer/public/SHAFFEROTO/googlePhotosOverflow/Waterfalls 2024/IMG_9140.HEIC",
         // "--parameters=/Users/tedshaffer/Documents/IMG_9140.jpg",
 
-        // "--job=ConvertHeicFileToJpg",
-        // "--parameters=/Users/tedshaffer/Documents/IMG_9070.HEIC",
-        // "--parameters=/Users/tedshaffer/Documents/IMG_9070.jpg",
+        "--job=ConvertHeicFileToJpg",
+        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Waterfalls 2024/IMG_9141.HEIC",
+        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Waterfalls 2024/IMG_9141.jpg",
 
-        "--job=ConvertHeicFolderToJpg",
-        "--parameters=/Users/tedshaffer/Documents/photoConverterTestData/NeedingConversion/test",
-        "--parameters=/Users/tedshaffer/Documents/photoConverterTestData/ReadyForImport/test",
+        // "--job=ConvertHeicFolderToJpg",
+        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Waterfalls 2024",
+        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Waterfalls 2024",
 
       ]
     }
