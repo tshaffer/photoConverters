@@ -2,6 +2,7 @@ const { promisify } = require('util');
 const fs = require('fs');
 import convert from 'heic-convert';
 import { checkAndCreateDirectory, getConvertibleImageFilePaths } from '../utilities';
+import { convertCreateDateToISO } from '../utilities/uilities';
 const { exiftool } = require('exiftool-vendored');
 
 export async function convertHEICFileToJPEG(inputFilePath: string, outputFilePath: string): Promise<void> {
@@ -34,65 +35,72 @@ export const convertHeicToJpgWithExif = async (heicPath: string, jpgPath: string
   // Step 1: Retrieve EXIF data from the HEIC file
   console.log('heicPath: ', heicPath);
   const exifData = await exiftool.read(heicPath);
-  console.log('exifData: ', exifData);
+  // console.log('exifData: ', exifData);
 
-  // Step 2: Convert the HEIC file to JPG
-  const inputBuffer = await promisify(fs.readFile)(heicPath);
-  console.log('readFile successful');
+  console.log('createDate: ', exifData.CreateDate);
 
-  const outputBuffer = await convert({
-    buffer: inputBuffer, // the HEIC file buffer
-    format: 'JPEG',      // output format
-    quality: 1           // the jpeg compression quality, between 0 and 1
-  });
+  const isoDate: string = await convertCreateDateToISO(exifData);
+  console.log('isoDate: ', isoDate);
 
-  try {
+  return;
+}
+  // // Step 2: Convert the HEIC file to JPG
+  // const inputBuffer = await promisify(fs.readFile)(heicPath);
+  // console.log('readFile successful');
 
-    // Step 3: Save the converted JPG
-    await promisify(fs.writeFile)(jpgPath, outputBuffer);
-    console.log(`Converted ${heicPath} to ${jpgPath}`);
-  } catch (error) {
-    console.error('Error during conversion:', error);
-  } finally {
-    // Ensure the exiftool process is properly terminated
-    // await exiftool.end();
-    console.log('first Finally block');
-  }
-  try {
-    // Step 3: Save the converted JPG
-    await promisify(fs.writeFile)(jpgPath, outputBuffer);
-    console.log(`Converted ${heicPath} to ${jpgPath}`);
+  // const outputBuffer = await convert({
+  //   buffer: inputBuffer, // the HEIC file buffer
+  //   format: 'JPEG',      // output format
+  //   quality: 1           // the jpeg compression quality, between 0 and 1
+  // });
 
-    // Step 4: Write the saved EXIF data to the JPG
-    // await exiftool.write(jpgPath, exifData);
+  // try {
 
-    console.log('try write');
-    // const p = exiftool.write(jpgPath, { XPComment: "this is a test comment" })
-    try {
+  //   // Step 3: Save the converted JPG
+  //   await promisify(fs.writeFile)(jpgPath, outputBuffer);
+  //   console.log(`Converted ${heicPath} to ${jpgPath}`);
+  // } catch (error) {
+  //   console.error('Error during conversion:', error);
+  // } finally {
+  //   // Ensure the exiftool process is properly terminated
+  //   // await exiftool.end();
+  //   console.log('first Finally block');
+  // }
+  // try {
+  //   // Step 3: Save the converted JPG
+  //   await promisify(fs.writeFile)(jpgPath, outputBuffer);
+  //   console.log(`Converted ${heicPath} to ${jpgPath}`);
 
-      // const p = exiftool.write(jpgPath, { Orientation: '6' })
-      const p = exiftool.write(jpgPath, { AllDates: "2024-08-07T14:00:00" })
-      // const p = exiftool.write(jpgPath, { ProfileCreator: 'Apple Computer, Inc.' });
-      console.log('return from write');
-      await p;
-      console.log('return from await');
-      
-    }
-    catch (error) {
-      console.error('Error during EXIF transfer:', error);
-    } finally {
-      console.log('second Finally block');
-      // Ensure the exiftool process is properly terminated
-      await exiftool.end();
-    }
+  //   // Step 4: Write the saved EXIF data to the JPG
+  //   // await exiftool.write(jpgPath, exifData);
+
+  //   console.log('try write');
+  //   // const p = exiftool.write(jpgPath, { XPComment: "this is a test comment" })
+  //   try {
+
+  //     // const p = exiftool.write(jpgPath, { Orientation: '6' })
+  //     const p = exiftool.write(jpgPath, { AllDates: "2024-08-07T14:00:00" })
+  //     // const p = exiftool.write(jpgPath, { ProfileCreator: 'Apple Computer, Inc.' });
+  //     console.log('return from write');
+  //     await p;
+  //     console.log('return from await');
+
+  //   }
+  //   catch (error) {
+  //     console.error('Error during EXIF transfer:', error);
+  //   } finally {
+  //     console.log('second Finally block');
+  //     // Ensure the exiftool process is properly terminated
+  //     await exiftool.end();
+  //   }
 
 
-    //   console.log(`Copied EXIF data from ${heicPath} to ${jpgPath}`);
-    // } catch (error) {
-    //   console.error('Error during EXIF transfer:', error);
-    // } finally {
-    //   console.log('second Finally block');
-    //   // Ensure the exiftool process is properly terminated
-    //   await exiftool.end();
-    // }
-  }
+  //   //   console.log(`Copied EXIF data from ${heicPath} to ${jpgPath}`);
+  //   // } catch (error) {
+  //   //   console.error('Error during EXIF transfer:', error);
+  //   // } finally {
+  //   //   console.log('second Finally block');
+  //   //   // Ensure the exiftool process is properly terminated
+  //   //   await exiftool.end();
+  //   // }
+  // // }
