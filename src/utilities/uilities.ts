@@ -1,47 +1,39 @@
 import { Tags, ExifDateTime } from "exiftool-vendored";
-import { DateObject, DateTime } from 'luxon';
+import { DateTime } from 'luxon';
 
 export async function convertCreateDateToISO(tags: Tags): Promise<string | null> {
-  try {
-    const createDate = tags.CreateDate; // ExifDateTime | string | undefined
-    if (!createDate) {
-      throw new Error('CreateDate not found in EXIF tags');
-    }
-
-    let isoDateString: string;
-
-    if (createDate instanceof ExifDateTime) {
-
-      const { year, month, day, hour, minute, second, millisecond, tzoffsetMinutes } = createDate;
-
-      // Calculate the time zone offset in hours
-      const timeZoneOffset = tzoffsetMinutes / 60;
-
-      // If CreateDate is an ExifDateTime object, use its properties directly and set to UTC
-      const dateTime: DateTime = DateTime.fromObject({
-        year,
-        month,
-        day,
-        hour,
-        minute,
-        second,
-        millisecond,
-        zone: `UTC${timeZoneOffset > 0 ? '+' : ''}${timeZoneOffset}`
-      });
-
-      isoDateString = dateTime.toISO();
-
-    } else {
-      // If CreateDate is a string, parse and format it using Luxon and set to UTC
-      // Assuming the string format is "yyyy:MM:dd HH:mm:ss"
-      const parsedDate: DateTime = DateTime.fromFormat(createDate, 'yyyy:MM:dd HH:mm:ss', { zone: 'utc' });
-      isoDateString = parsedDate.toISO();
-    }
-
-    return isoDateString;
-  } catch (err) {
-    console.error('Error converting CreateDate to ISO format:', err);
-    return null;
+  const createDate = tags.CreateDate; // ExifDateTime | string | undefined
+  if (!createDate) {
+    throw new Error('CreateDate not found in EXIF tags');
   }
+  let isoDateString: string;
+  if (createDate instanceof ExifDateTime) {
+    isoDateString = convertExifDateTimeToUTC(createDate);
+  }
+  else {
+    const parsedDate: DateTime = DateTime.fromFormat(createDate, 'yyyy:MM:dd HH:mm:ss', { zone: 'utc' });
+    isoDateString = parsedDate.toISO();
+  }
+
+  console.log('isoDateString: ', isoDateString);
+  return isoDateString;
 }
 
+function convertExifDateTimeToUTC(exifDateTime: ExifDateTime): string {
+  // Create a Luxon DateTime object from the ExifDateTime components
+  const dateTime = DateTime.fromObject({
+    year: exifDateTime.year,
+    month: exifDateTime.month,
+    day: exifDateTime.day,
+    hour: exifDateTime.hour,
+    minute: exifDateTime.minute,
+    second: exifDateTime.second,
+    millisecond: exifDateTime.millisecond,
+    zone: exifDateTime.tzoffsetMinutes !== undefined
+      ? `UTC${(exifDateTime.tzoffsetMinutes / 60) >= 0 ? '+' : ''}${(exifDateTime.tzoffsetMinutes / 60)}`
+      : 'UTC' // Default to UTC if no offset is provided
+  });
+
+  // Convert to UTC and return as ISO string with 'Z' suffix
+  return dateTime.toUTC().toISO();
+}
