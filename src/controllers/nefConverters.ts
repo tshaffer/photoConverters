@@ -26,7 +26,7 @@ export async function convertNEFFileToJPEG(inputFilePath: string, outputFilePath
           return reject(err);
         }
         else {
-          console.log(`Converted ${inputFilePath} to JPEG`);
+          // console.log(`Converted ${inputFilePath} to JPEG`);
           return resolve();
         }
       });
@@ -38,13 +38,14 @@ export async function convertNEFFileToJPEGWithEXIF(inputFilePath: string, output
   try {
 
     // Step 1: Retrieve EXIF data from the HEIC file
-    const exifData = await exiftool.read(inputFilePath);
+    // const exifData = await exiftool.read(inputFilePath);
 
     // Step 3: Convert and save the converted file
     await convertNEFFileToJPEG(inputFilePath, outputFilePath);
+    console.log(`exiftool -TagsFromFile "${inputFilePath}" "${outputFilePath}"`);
 
     // Step 4: Write the saved EXIF data to the JPG
-    await writeTags(outputFilePath, exifData);
+    // await writeTags(outputFilePath, exifData);
   }
   catch (error) {
     console.error('Error in convertHeicToJpgWithExif:', error);
