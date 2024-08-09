@@ -18,10 +18,10 @@ export async function convertHEICFileToJPEG(inputFilePath: string, outputFilePat
 export async function convertHEICFolderToJPEGWithEXIF(inputFolder: string, outputFolder: string): Promise<void> {
   console.log('Folder conversion invoked: ', inputFolder, outputFolder);
   await checkAndCreateDirectory(outputFolder);
-  const imageFileExtensions = ['.heic', '.HEIC', '.nef', '.NEF'];
+  const imageFileExtensions = ['.heic', '.HEIC'];
   const filesToConvert = getConvertibleImageFilePaths(imageFileExtensions, inputFolder);
   for (const inputFilePath of filesToConvert) {
-    const outputFilePath: string = inputFilePath.replace(inputFolder, outputFolder).replace('.heic', '.jpg').replace('.HEIC', '.jpg').replace('.nef', '.jpg').replace('.NEF', '.jpg');
+    const outputFilePath: string = inputFilePath.replace(inputFolder, outputFolder).replace('.heic', '.jpg').replace('.HEIC', '.jpg');
     console.log('Converting: ', inputFilePath, ' to ', outputFilePath);
     await convertHEICFileToJPEGWithEXIF(inputFilePath, outputFilePath);
   }

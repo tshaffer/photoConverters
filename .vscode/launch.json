@@ -27,9 +27,14 @@
         // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Waterfalls 2024/IMG_9141.HEIC",
         // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Waterfalls 2024/IMG_9141.jpg",
 
-        "--job=ConvertHeicFolderToJpg",
-        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Snow Lake",
-        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Snow Lake",
+        // "--job=ConvertHeicFolderToJpg",
+        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Snow Lake",
+        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Snow Lake",
+
+        "--job=ConvertNefFileToJpg",
+        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024/DSC_1593.NEF",
+        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024/DSC_1593.jpg",
+
       ]
     }
   ]

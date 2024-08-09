@@ -1,8 +1,8 @@
-import { convertNEFFileToJPEG, convertNEFFolderToJPEG } from '../controllers';
+import { convertNEFFileToJPEGWithEXIF, convertNEFFolderToJPEG } from '../controllers';
 
 export const convertNefFileToJpgJob = async (input: string, output: string) => {
   console.log('convertNefFileToJpgJob invoked', input, output);
-  await convertNEFFileToJPEG(input, output);
+  await convertNEFFileToJPEGWithEXIF(input, output);
   console.log('convertNefFileToJpgJob completed');
 }
 
