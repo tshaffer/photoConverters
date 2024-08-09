@@ -33,13 +33,14 @@
         // "--job=ConvertNefFileToJpg",
         // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024/DSC_1593.NEF",
         // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024/DSC_1593.jpg",
-        // "--job=ConvertNefFolderToJpg",
-        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024",
-        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024",
         
-        "--job=ConvertNefFileToJpg",
-        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024/_DSC1668.NEF",
-        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024/DSC1668.jpg",
+        "--job=ConvertNefFolderToJpg",
+        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024",
+        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Bend 2024",
+        
+        // "--job=ConvertNefFileToJpg",
+        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024/_DSC1668.NEF",
+        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024/DSC1668.jpg",
       ]
     }
   ]
