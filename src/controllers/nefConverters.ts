@@ -1,16 +1,40 @@
 require('util');
+import { promisify } from 'util';
 import { getConvertibleImageFilePaths } from '../utilities';
 const { exiftool } = require('exiftool-vendored');
 
 const gm = require('gm').subClass({ imageMagick: true });
 
 export async function convertNEFFileToJPEG(inputFilePath: string, outputFilePath: string): Promise<void> {
-  gm(inputFilePath)
-    .write(outputFilePath, (err: any) => {
-      if (err) throw err;
-      console.log(`Converted ${inputFilePath} to JPEG`);
-    });
+
+  return new Promise((resolve, reject) => {
+    gm(inputFilePath)
+      .write(outputFilePath, (err: any) => {
+        if (err) {
+          console.error('Error in convertNEFFileToJPEG:', err);
+          return reject(err);
+        }
+        else {
+          console.log(`Converted ${inputFilePath} to JPEG`);
+          return resolve();
+        }
+      });
+  });
+
+  // console.log('invoke gm');
+  // const writer = gm(inputFilePath);
+  // console.log('return from gm invocation');
+  // await promisify(writer.write(outputFilePath));
+  // console.log('return from write');
+  // return Promise.resolve();
+
+// gm(inputFilePath)
+//   .write(outputFilePath, (err: any) => {
+//     if (err) throw err;
+//     console.log(`Converted ${inputFilePath} to JPEG`);
+//   });
 }
+
 
 export async function convertNEFFolderToJPEG(inputFolder: string, outputFolder: string): Promise<void> {
   console.log('convertNEFFolderToJPEG invoked: ', inputFolder, outputFolder);
