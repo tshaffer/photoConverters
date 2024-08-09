@@ -28,10 +28,8 @@
         // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Waterfalls 2024/IMG_9141.jpg",
 
         "--job=ConvertHeicFolderToJpg",
-        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Waterfalls 2024",
-        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Waterfalls 2024",
-        /Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Snow Lake
-
+        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Snow Lake",
+        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Snow Lake",
       ]
     }
   ]
