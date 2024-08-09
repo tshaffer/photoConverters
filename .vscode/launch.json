@@ -31,13 +31,13 @@
         // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Snow Lake",
         // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Snow Lake",
 
-        // "--job=ConvertNefFileToJpg",
-        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024/DSC_1593.NEF",
-        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024/DSC_1593.jpg",
+        "--job=ConvertNefFileToJpg",
+        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024/_DSC1668.NEF",
+        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024/DSC1668.jpg",
 
-        "--job=ConvertNefFolderToJpg",
-        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024",
-        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024",
+        // "--job=ConvertNefFolderToJpg",
+        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024",
+        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024",
 
       ]
     }
