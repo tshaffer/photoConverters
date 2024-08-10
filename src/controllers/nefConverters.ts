@@ -1,8 +1,6 @@
 require('util');
-import { getConvertibleImageFilePaths } from '../utilities';
-import { writeTags } from './heicConverters';
-const { exiftool } = require('exiftool-vendored');
-import { execFileSync } from 'child_process';
+import { copyExifTags, getConvertibleImageFilePaths } from '../utilities';
+require('exiftool-vendored');
 
 const gm = require('gm').subClass({ imageMagick: true });
 
@@ -17,6 +15,17 @@ export async function convertNEFFolderToJPEG(inputFolder: string, outputFolder: 
   console.log('convertNEFFolderToJPEG complete');
 }
 
+export async function convertNEFFileToJPEGWithEXIF(inputFilePath: string, outputFilePath: string): Promise<void> {
+  try {
+    console.log(`convertNEFFileToJPEGWithEXIF: ${inputFilePath} to ${outputFilePath}`);
+    await convertNEFFileToJPEG(inputFilePath, outputFilePath);
+    copyExifTags(inputFilePath, outputFilePath);
+  }
+  catch (error) {
+    console.error('Error in convertNEFFileToJPEGWithEXIF:', error);
+  }
+}
+
 export async function convertNEFFileToJPEG(inputFilePath: string, outputFilePath: string): Promise<void> {
   return new Promise((resolve, reject) => {
     gm(inputFilePath)
@@ -26,46 +35,8 @@ export async function convertNEFFileToJPEG(inputFilePath: string, outputFilePath
           return reject(err);
         }
         else {
-          // console.log(`Converted ${inputFilePath} to JPEG`);
           return resolve();
         }
       });
   });
-}
-
-
-export async function convertNEFFileToJPEGWithEXIF(inputFilePath: string, outputFilePath: string): Promise<void> {
-  try {
-
-    // Step 1: Retrieve EXIF data from the HEIC file
-    // const exifData = await exiftool.read(inputFilePath);
-
-    // Step 3: Convert and save the converted file
-
-    console.log(`convertNEFFileToJPEGWithEXIF: ${inputFilePath} to ${outputFilePath}`);
-
-    await convertNEFFileToJPEG(inputFilePath, outputFilePath);
-    executeExiftoolTagsFromFile(inputFilePath, outputFilePath);
-
-    // console.log(`exiftool -TagsFromFile "${inputFilePath}" "${outputFilePath}"`);
-
-    // Step 4: Write the saved EXIF data to the JPG
-    // await writeTags(outputFilePath, exifData);
-  }
-  catch (error) {
-    console.error('Error in convertHeicToJpgWithExif:', error);
-  }
-}
-
-
-const executeExiftoolTagsFromFile = (sourceFile: string, targetFile: string) => {
-  try {
-    const output = execFileSync('exiftool', ['-TagsFromFile', sourceFile, targetFile]);
-    console.log(`stdout: ${output.toString()}`);
-  } catch (error) {
-    console.error(`Error: ${error.message}`);
-    if (error.stderr) {
-      console.error(`stderr: ${error.stderr.toString()}`);
-    }
-  }
 }
