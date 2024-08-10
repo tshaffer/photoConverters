@@ -1,3 +1,3 @@
 export * from './fsUtils';
-export * from './uilities';
+export * from './utilities';
 

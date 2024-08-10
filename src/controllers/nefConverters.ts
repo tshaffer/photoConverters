@@ -19,7 +19,7 @@ export async function convertNEFFileToJPEGWithEXIF(inputFilePath: string, output
   try {
     console.log(`convertNEFFileToJPEGWithEXIF: ${inputFilePath} to ${outputFilePath}`);
     await convertNEFFileToJPEG(inputFilePath, outputFilePath);
-    copyExifTags(inputFilePath, outputFilePath);
+    copyExifTags(inputFilePath, outputFilePath, false);
   }
   catch (error) {
     console.error('Error in convertNEFFileToJPEGWithEXIF:', error);

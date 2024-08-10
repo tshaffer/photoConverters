@@ -35,12 +35,21 @@
         // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024/DSC_1593.jpg",
         
         // "--job=ConvertHeicFolderToJpg",
-        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Snow Lake",
-        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Snow Lake",
+        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Waterfalls 2024",
+        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Waterfalls 2024",
         
-        "--job=ConvertNefFolderToJpg",
-        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024",
-        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Bend 2024",
+        "--job=ConvertHeicFolderToJpg",
+        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Snow Lake",
+        "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Snow Lake",
+        
+        // "--job=ConvertNefFolderToJpg",
+        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Bend 2024",
+        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/ReadyForImport/Bend 2024",
+
+        
+        // "--job=ConvertHeicFileToJpg",
+        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Waterfalls 2024/IMG_9265.HEIC",
+        // "--parameters=/Users/tedshaffer/Documents/photoConverterTmpData/NeedingConversion/Waterfalls 2024/IMG_9265.jpg",
       ]
     }
   ]

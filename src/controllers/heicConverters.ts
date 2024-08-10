@@ -2,7 +2,7 @@ const { promisify } = require('util');
 const fs = require('fs');
 import convert from 'heic-convert';
 import { checkAndCreateDirectory, getConvertibleImageFilePaths } from '../utilities';
-import { copyExifTags } from '../utilities/uilities';
+import { copyExifTags } from '../utilities/utilities';
 const { exiftool } = require('exiftool-vendored');
 
 export async function convertHEICFolderToJPEGWithEXIF(inputFolder: string, outputFolder: string): Promise<void> {
@@ -24,7 +24,7 @@ export const convertHEICFileToJPEGWithEXIF = async (inputFilePath: string, outpu
   try {
     console.log(`convertHEICFileToJPEGWithEXIF: ${inputFilePath} to ${outputFilePath}`);
     await convertHEICFileToJPEG(inputFilePath, outputFilePath);
-    copyExifTags(inputFilePath, outputFilePath);
+    copyExifTags(inputFilePath, outputFilePath, true);
   }
   catch (error) {
     console.error('Error in convertHEICFileToJPEGWithEXIF:', error);
